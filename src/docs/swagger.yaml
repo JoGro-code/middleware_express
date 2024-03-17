@@ -1,0 +1,114 @@
+swagger: "2.0"
+info:
+  description: "API für die Middleware Express Anwendung."
+  version: "1.0.0"
+  title: "Middleware Express API"
+
+# Host und Base Path konfigurieren
+host: "localhost:3000"
+basePath: "/api"
+
+schemes:
+  - "http"
+
+paths:
+  /users:
+    get:
+      summary: "Alle Benutzer abrufen"
+      responses:
+        200:
+          description: "Eine Liste aller Benutzer"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+    post:
+      summary: "Einen neuen Benutzer erstellen"
+      responses:
+        201:
+          description: "Der neu erstellte Benutzer"
+          schema:
+            $ref: "#/definitions/User"
+  /users/{id}:
+    get:
+      summary: "Einen Benutzer nach ID abrufen"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Ein Benutzerobjekt"
+          schema:
+            $ref: "#/definitions/User"
+    put:
+      summary: "Einen Benutzer aktualisieren"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Das aktualisierte Benutzerobjekt"
+          schema:
+            $ref: "#/definitions/User"
+    delete:
+      summary: "Einen Benutzer löschen"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Bestätigung des Löschvorgangs"
+  /prices:
+    get:
+      summary: "Preisinformationen abrufen"
+      parameters:
+        - name: "customerID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "Die ID des Kunden"
+        - name: "mandantenID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "Die ID des Mandanten"
+        - name: "articleNos"
+          in: "query"
+          required: true
+          type: "string"
+          description: "Eine kommaseparierte Liste von Artikelnummern"
+      responses:
+        200:
+          description: "Eine Liste von Preisinformationen für die angegebenen Artikel"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PriceInfo"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      email:
+        type: "string"
+  PriceInfo:
+    type: "object"
+    properties:
+      articleNo:
+        type: "string"
+        description: "Die Artikelnummer"
+      price:
+        type: "number"
+        description: "Der Preis des Artikels"
+      currency:
+        type: "string"
+        description: "Die Währung des Preises"

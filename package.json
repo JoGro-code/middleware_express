@@ -1,0 +1,20 @@
+{
+  "name": "middleware_express",
+  "version": "1.0.0",
+  "description": "Express Application with API-Key Authentication and MSSQL Database.",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "echo 'No build step required for this project.'"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "dotenv": "^16.4.5",
+    "mssql": "^10.0.2",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
